@@ -5,16 +5,18 @@ async function getJobById(req, res) {
   const jobs = await getAllJob();
   const job = jobs.find((item) => item.id === id);
   if (!job) {
-    return {
+    res.json({
       status: 404,
       data: null,
       message: "Not found",
-    };
+    });
+    return;
   }
-  return {
+  res.json({
     status: 200,
     data: job,
-  };
+  });
+  return;
 }
 
 module.exports = getJobById;

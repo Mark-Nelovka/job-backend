@@ -8,11 +8,12 @@ async function changeAtrributes(req, res) {
   const jobs = await getAllJob();
   const job = await jobs.find((item) => item.id === id);
   if (!job) {
-    return {
+    res.json({
       status: 404,
       data: null,
       message: "Not found",
-    };
+    });
+    return;
   }
 
   switch (action) {
@@ -21,30 +22,28 @@ async function changeAtrributes(req, res) {
         it.id === id ? { ...it, save: save } : it
       );
       await fs.writeFile(filePath, JSON.stringify(changeItem));
-      // res.status(200).json({
-      //   status: 200,
-      //   data: changeItem,
-      // });
-      return {
+      res.status(200).json({
         status: 200,
         data: changeItem,
-      };
+      });
+      break;
     case "rating":
       changeItem = jobs.map((it) =>
         it.id === id ? { ...it, rating: rating } : it
       );
       await fs.writeFile(filePath, JSON.stringify(changeItem));
-      // res.status(200).json({
-      //   status: 200,
-      //   data: changeItem,
-      // });
-      return {
+      res.status(200).json({
         status: 200,
         data: changeItem,
-      };
+      });
+      break;
 
     default:
-      return jobs;
+      res.json({
+        status: 400,
+        data: null,
+        message: "Unknown action",
+      });
   }
 }
 
