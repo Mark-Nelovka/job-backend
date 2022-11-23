@@ -1,13 +1,20 @@
-const fs = require("fs/promises");
+const getAllJob = require("./getAllJob");
 
 async function getJobById(req, res) {
   const { id } = req.params;
-  const job = data.find((item) => item.id === id);
-  if (job) {
-    res.status(200).json([job]);
-    return;
+  const jobs = await getAllJob();
+  const job = jobs.find((item) => item.id === id);
+  if (!job) {
+    return {
+      status: 404,
+      data: null,
+      message: "Not found",
+    };
   }
-  res.status(404).json({ message: "404 Not found" });
+  return {
+    status: 200,
+    data: job,
+  };
 }
 
 module.exports = getJobById;
