@@ -1,12 +1,10 @@
-const filePath = require("../Jobs/filePath");
-const fs = require("fs/promises");
+const invokeAction = require("../middlewares/invokeAction");
 
 async function getAllJob(req, res) {
-  const data = await fs.readFile(filePath);
-  const jobs = JSON.parse(data);
+  const data = await invokeAction({ action: "getAll" });
   res.json({
     status: 200,
-    data: jobs,
+    data,
   });
 }
 

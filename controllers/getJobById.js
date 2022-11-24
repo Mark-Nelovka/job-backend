@@ -2,7 +2,7 @@ const getAllJob = require("./getAllJob");
 
 async function getJobById(req, res) {
   const { id } = req.params;
-  const jobs = await getAllJob();
+  const jobs = await getAllJob(req, res);
   const job = jobs.find((item) => item.id === id);
   if (!job) {
     res.json({
@@ -14,7 +14,7 @@ async function getJobById(req, res) {
   }
   res.json({
     status: 200,
-    data: job,
+    data: [job],
   });
   return;
 }
