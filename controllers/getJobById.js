@@ -1,9 +1,7 @@
-const getAllJob = require("./getAllJob");
-
+const invokeAction = require("../middlewares");
 async function getJobById(req, res) {
   const { id } = req.params;
-  const jobs = await getAllJob(req, res);
-  const job = jobs.find((item) => item.id === id);
+  const job = await invokeAction({ action: "getById", id });
   if (!job) {
     res.json({
       status: 404,
@@ -14,9 +12,8 @@ async function getJobById(req, res) {
   }
   res.json({
     status: 200,
-    data: [job],
+    data: job,
   });
-  return;
 }
 
 module.exports = getJobById;

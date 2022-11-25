@@ -1,4 +1,4 @@
-const invokeAction = require("../middlewares/invokeAction");
+const invokeAction = require("../middlewares");
 
 async function getAllJob(req, res) {
   const data = await invokeAction({ action: "getAll" });

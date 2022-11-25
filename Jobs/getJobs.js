@@ -1,10 +1,10 @@
 const fs = require("fs/promises");
-const filePath = require("../Jobs");
+const filePath = require("./filePath");
 
-const getJobs = async () => {
+async function getJobs() {
   const data = await fs.readFile(filePath);
   const jobs = JSON.parse(data);
   return jobs;
-};
+}
 
 module.exports = getJobs;

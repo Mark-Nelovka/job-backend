@@ -1,3 +1,3 @@
-import { invokeAction } from "./invokeAction";
+const invokeAction = require("./invokeAction");
 
-export default invokeAction;
+module.exports = invokeAction;
