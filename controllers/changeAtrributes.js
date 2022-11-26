@@ -1,7 +1,7 @@
 const invokeAction = require("../middlewares");
 
 async function changeAtrributes(req, res) {
-  const { save, id, rating, action } = req.body;
+  const { id, rating, save, action } = req.body;
   const jobsWithChangedAttributes = await invokeAction({
     action,
     id,
