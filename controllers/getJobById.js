@@ -1,7 +1,9 @@
-const invokeAction = require("../middlewares");
+const { Jobs } = require("../models/jobsSchema");
+
 async function getJobById(req, res) {
   const { id } = req.params;
-  const job = await invokeAction({ action: "getById", id });
+  const job = await Jobs.findOne({ _id: id });
+  console.log(job);
   if (!job) {
     res.json({
       status: 404,
@@ -12,7 +14,7 @@ async function getJobById(req, res) {
   }
   res.json({
     status: 200,
-    data: job,
+    data: [job],
   });
 }
 

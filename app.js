@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 
 const jobRouter = require("./routes/job");
 
@@ -17,10 +18,6 @@ app.use((req, res) => {
 
 app.use((err, req, res, next) => {
   res.status(500).json({ message: err.message });
-});
-
-app.listen(8080, () => {
-  console.log("Database connection successful");
 });
 
 module.exports = app;

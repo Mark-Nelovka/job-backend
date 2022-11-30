@@ -1,7 +1,7 @@
-const invokeAction = require("../middlewares");
+const { Jobs } = require("../models/jobsSchema");
 
 async function getAllJob(req, res) {
-  const data = await invokeAction({ action: "getAll" });
+  const data = await Jobs.find({});
   res.json({
     status: 200,
     data,
